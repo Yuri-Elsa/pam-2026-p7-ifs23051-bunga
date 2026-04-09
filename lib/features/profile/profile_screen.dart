@@ -36,7 +36,7 @@ class _ProfileBody extends StatelessWidget {
                   backgroundColor: colorScheme.primary,
                   child: ClipOval(
                     child: Image.asset(
-                      'assets/images/profile.png',
+                      'assets/images/profile.jpg',
                       width: 110,
                       height: 110,
                       fit: BoxFit.cover,
@@ -53,7 +53,7 @@ class _ProfileBody extends StatelessWidget {
 
                 // Nama
                 Text(
-                  'Abdullah Ubaid',  // Ubah dengan nama kamu
+                  'Yuri Elsa Rona Uli Pakpahan',  // Ubah dengan nama kamu
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -63,7 +63,7 @@ class _ProfileBody extends StatelessWidget {
 
                 // Username
                 Text(
-                  'ifs18005',  // Ubah dengan username kamu
+                  'ifs23051',  // Ubah dengan username kamu
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: colorScheme.onSurfaceVariant,
                   ),
