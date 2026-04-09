@@ -77,7 +77,7 @@ class _LoadingWidgetState extends State<LoadingWidget>
             ),
             // Logo tengah
             Image.asset(
-              'assets/images/img_kol.png',
+              'assets/images/img_lily.png',
               width: 76,
               height: 76,
               fit: BoxFit.contain,

@@ -7,7 +7,7 @@ class ApiConstants {
   /// Base URL API Delcom Plants
   /// Modifikasi username `ifs18005` sesuai dengan username kamu.
   static const String baseUrl =
-      'https://pam-2026-p4-ifs18005-be.delcom.org:8080';
+      'https://pam-2026-p4-ifs23051-be.yuriii.fun:8080/';
 
   /// Endpoint plants
   static const String plants = '/plants';
