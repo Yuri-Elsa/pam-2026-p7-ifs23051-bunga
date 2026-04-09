@@ -7,6 +7,10 @@ import '../../features/plants/plants_add_screen.dart';
 import '../../features/plants/plants_detail_screen.dart';
 import '../../features/plants/plants_edit_screen.dart';
 import '../../features/plants/plants_screen.dart';
+import '../../features/flowers/flowers_screen.dart';
+import '../../features/flowers/flowers_add_screen.dart';
+import '../../features/flowers/flowers_detail_screen.dart';
+import '../../features/flowers/flowers_edit_screen.dart';
 import '../../features/profile/profile_screen.dart';
 import '../constants/route_constants.dart';
 import '../../shared/widgets/bottom_nav_widget.dart';
@@ -29,6 +33,10 @@ final GoRouter appRouter = GoRouter(
           builder: (context, state) => const PlantsScreen(),
         ),
         GoRoute(
+          path: RouteConstants.flowers,
+          builder: (context, state) => const FlowersScreen(),
+        ),
+        GoRoute(
           path: RouteConstants.profile,
           builder: (context, state) => const ProfileScreen(),
         ),
@@ -43,7 +51,6 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/plants/:id',
       builder: (context, state) {
-        // ID bertipe String (UUID)
         final id = state.pathParameters['id'] ?? '';
         return PlantsDetailScreen(plantId: id);
       },
@@ -53,6 +60,26 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         final id = state.pathParameters['id'] ?? '';
         return PlantsEditScreen(plantId: id);
+      },
+    ),
+
+    // Routes Bunga
+    GoRoute(
+      path: '/flowers/add',
+      builder: (context, state) => const FlowersAddScreen(),
+    ),
+    GoRoute(
+      path: '/flowers/:id',
+      builder: (context, state) {
+        final id = state.pathParameters['id'] ?? '';
+        return FlowersDetailScreen(flowerId: id);
+      },
+    ),
+    GoRoute(
+      path: '/flowers/:id/edit',
+      builder: (context, state) {
+        final id = state.pathParameters['id'] ?? '';
+        return FlowersEditScreen(flowerId: id);
       },
     ),
   ],

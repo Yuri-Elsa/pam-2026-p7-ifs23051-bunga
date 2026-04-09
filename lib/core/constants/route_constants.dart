@@ -8,9 +8,14 @@ class RouteConstants {
   static const String plantsAdd = '/plants/add';
 
   /// UUID sebagai path parameter
-  /// Contoh: /plants/550e8400-e29b-41d4-a716-446655440000
   static String plantsDetail(String id) => '/plants/$id';
   static String plantsEdit(String id) => '/plants/$id/edit';
+
+  /// Route Bahasa Bunga
+  static const String flowers = '/flowers';
+  static const String flowersAdd = '/flowers/add';
+  static String flowersDetail(String id) => '/flowers/$id';
+  static String flowersEdit(String id) => '/flowers/$id/edit';
 
   static const String profile = '/profile';
 }

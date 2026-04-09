@@ -14,4 +14,10 @@ class ApiConstants {
 
   /// Endpoint detail / edit / delete plant by UUID
   static String plantById(String id) => '/plants/$id';
+
+  /// Endpoint flowers (Bahasa Bunga)
+  static const String flowers = '/flowers';
+
+  /// Endpoint detail / edit / delete flower by UUID
+  static String flowerById(String id) => '/flowers/$id';
 }

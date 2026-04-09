@@ -31,10 +31,16 @@ class BottomNavWidget extends StatelessWidget {
       activeIcon: Icons.home,
     ),
     _NavItem(
-      label: 'Plants',
+      label: 'Tanaman',
       route: RouteConstants.plants,
       icon: Icons.eco_outlined,
       activeIcon: Icons.eco,
+    ),
+    _NavItem(
+      label: 'Bunga',
+      route: RouteConstants.flowers,
+      icon: Icons.local_florist_outlined,
+      activeIcon: Icons.local_florist,
     ),
     _NavItem(
       label: 'Profile',
@@ -53,8 +59,6 @@ class BottomNavWidget extends StatelessWidget {
     final currentLocation = _getCurrentRoute(context);
     final colorScheme = Theme.of(context).colorScheme;
 
-    // boxShadow harus ada di luar ClipRRect agar tidak terpotong.
-    // ClipRRect hanya membungkus NavigationBar untuk border radius.
     return DecoratedBox(
       decoration: BoxDecoration(
         boxShadow: [
@@ -73,36 +77,36 @@ class BottomNavWidget extends StatelessWidget {
         ],
       ),
       child: ClipRRect(
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-          child: ColoredBox(
-            color: colorScheme.surface,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 6),
-              child: NavigationBar(
-                height: 70,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                indicatorColor: Colors.transparent,
-                selectedIndex: _getSelectedIndex(currentLocation),
-                onDestinationSelected: (index) {
-                  context.go(_items[index].route);
-                },
-                destinations: _items.map((item) {
-                  final isSelected =
-                      currentLocation.startsWith(item.route) &&
-                          (item.route == RouteConstants.home
-                              ? currentLocation == RouteConstants.home
-                              : true);
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+        child: ColoredBox(
+          color: colorScheme.surface,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 6),
+            child: NavigationBar(
+              height: 70,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              indicatorColor: Colors.transparent,
+              selectedIndex: _getSelectedIndex(currentLocation),
+              onDestinationSelected: (index) {
+                context.go(_items[index].route);
+              },
+              destinations: _items.map((item) {
+                final isSelected =
+                    currentLocation.startsWith(item.route) &&
+                        (item.route == RouteConstants.home
+                            ? currentLocation == RouteConstants.home
+                            : true);
 
-                  return NavigationDestination(
-                    key: Key(item.label),
-                    icon: _NavIcon(item: item, isSelected: isSelected),
-                    label: item.label,
-                  );
-                }).toList(),
-              ),
+                return NavigationDestination(
+                  key: Key(item.label),
+                  icon: _NavIcon(item: item, isSelected: isSelected),
+                  label: item.label,
+                );
+              }).toList(),
             ),
-          )
+          ),
+        ),
       ),
     );
   }
@@ -110,7 +114,8 @@ class BottomNavWidget extends StatelessWidget {
   int _getSelectedIndex(String location) {
     if (location == RouteConstants.home) return 0;
     if (location.startsWith(RouteConstants.plants)) return 1;
-    if (location.startsWith(RouteConstants.profile)) return 2;
+    if (location.startsWith(RouteConstants.flowers)) return 2;
+    if (location.startsWith(RouteConstants.profile)) return 3;
     return 0;
   }
 }
@@ -125,24 +130,33 @@ class _NavIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
+    // Warna aktif untuk bunga menggunakan secondary (kuning/amber),
+    // untuk item lainnya tetap primary (hijau)
+    final isFlower = item.route == RouteConstants.flowers;
+    final activeColor =
+    isFlower ? colorScheme.secondary : colorScheme.primary;
+    final activeBg = isFlower
+        ? colorScheme.secondaryContainer.withValues(alpha: 0.25)
+        : colorScheme.primaryContainer.withValues(alpha: 0.2);
+    final activeBorder = isFlower
+        ? colorScheme.secondary.withValues(alpha: 0.35)
+        : colorScheme.primary.withValues(alpha: 0.3);
+
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       width: 48,
       height: 48,
       decoration: isSelected
           ? BoxDecoration(
-        color: colorScheme.primaryContainer.withValues(alpha: 0.2),
+        color: activeBg,
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(
-          color: colorScheme.primary.withValues(alpha: 0.3),
-        ),
+        border: Border.all(color: activeBorder),
       )
           : null,
       child: Icon(
         isSelected ? item.activeIcon : item.icon,
-        color: isSelected ? colorScheme.primary : colorScheme.onSurfaceVariant,
+        color: isSelected ? activeColor : colorScheme.onSurfaceVariant,
       ),
     );
   }
 }
-

@@ -6,6 +6,7 @@ import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_notifier.dart';
 import 'providers/plant_provider.dart';
+import 'providers/flower_provider.dart';
 
 class DelcomPlantsApp extends StatefulWidget {
   const DelcomPlantsApp({super.key});
@@ -31,6 +32,7 @@ class _DelcomPlantsAppState extends State<DelcomPlantsApp> {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => PlantProvider()),
+          ChangeNotifierProvider(create: (_) => FlowerProvider()),
         ],
         child: ValueListenableBuilder<ThemeMode>(
           valueListenable: _themeNotifier,
